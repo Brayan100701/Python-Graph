@@ -1,11 +1,12 @@
 import flet as ft
 import matplotlib as plt
-import calc
+import utilidades
 
 
 def main(page: ft.Page):
     def graficar(e):
-        print(dd_opt.value)
+        if utilidades.validate():
+            print(dd_opt.value)
     
     page.title = 'Graficadora de funciones'
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
