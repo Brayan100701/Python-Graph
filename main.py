@@ -5,7 +5,7 @@ import calc
 
 def main(page: ft.Page):
     def graficar(e):
-        pass
+        print(dd_opt.value)
     
     page.title = 'Graficadora de funciones'
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
@@ -14,7 +14,7 @@ def main(page: ft.Page):
     txt_min = ft.TextField(value="0", width=100)
 
     lbl_max = ft.Text(value='X max: ', color='white')
-    txt_max = ft.TextField(value="0", width=100)
+    txt_max = ft.TextField(value="100", width=100)
 
     btn_calc = ft.ElevatedButton(text='Calcular', on_click=graficar)
     
@@ -26,7 +26,8 @@ def main(page: ft.Page):
             ft.dropdown.Option('sin'),
             ft.dropdown.Option('cos'),
             ft.dropdown.Option('tan')
-        ]
+        ],
+        value='sin'
     )
 
 
@@ -39,6 +40,7 @@ def main(page: ft.Page):
                 txt_min,
                 lbl_max,
                 txt_max,
+                dd_opt,
                 btn_calc
             ]
         ),
