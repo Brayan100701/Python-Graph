@@ -5,8 +5,10 @@ import utilidades
 
 def main(page: ft.Page):
     def graficar(e):
-        if utilidades.validate():
-            print(dd_opt.value)
+        if utilidades.validate(txt_min.value, txt_max.value, txt_inter.value):
+            x_values, y_values = utilidades.calc_func(txt_min.value, txt_max.value, txt_inter.value, dd_opt.value)
+            for values in zip(x_values,y_values):
+                print(values)
     
     page.title = 'Graficadora de funciones'
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
@@ -16,6 +18,9 @@ def main(page: ft.Page):
 
     lbl_max = ft.Text(value='X max: ', color='white')
     txt_max = ft.TextField(value="100", width=100)
+
+    lbl_inter = ft.Text(value='Intervalo: ', color='white')
+    txt_inter = ft.TextField(value="1", width=100)
 
     btn_calc = ft.ElevatedButton(text='Calcular', on_click=graficar)
     
@@ -42,6 +47,8 @@ def main(page: ft.Page):
                 lbl_max,
                 txt_max,
                 dd_opt,
+                lbl_inter,
+                txt_inter,
                 btn_calc
             ]
         ),
