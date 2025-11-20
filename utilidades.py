@@ -1,3 +1,6 @@
+import matplotlib
+import matplotlib.pyplot as plt
+from flet.matplotlib_chart import MatplotlibChart
 import math
 
 is_int = lambda num: isinstance(int(num), int)
@@ -8,17 +11,43 @@ def validate(min,max,inter):
     except:
         return False
 
-def calc_val(num, func):
+def choose_fucn(func):
     match(func):
         case 'sin':
-            return math.sin(num)
+            return lambda num: math.sin(num)
         case 'cos':
-            return math.cos(num)
+            return lambda num: math.cos(num)
         case 'tan':
-            return math.tan(num)
+            return lambda num: math.tan(num)
     
-
 def calc_func(min, max, inter, func):
+    calc_val = choose_fucn(func)
     x_axis = range(int(min),int(max),int(inter))
-    y_axis = [calc_val(y,func) for y in x_axis]
+    y_axis = [calc_val(y) for y in x_axis]
     return x_axis, y_axis
+
+
+class Space:
+    def __init__(self):
+        self.space = None
+        self.size = [16.5,6.7]
+        self.default_plot()
+
+    def default_plot(self):
+        fig, axs = plt.subplots()
+        axs.set_xlim(0, 2)
+        axs.set_xlabel("x")
+        axs.set_ylabel("y")
+        axs.grid(True)
+        
+        fig.set_size_inches(self.size[0],self.size[1],forward=True)
+        fig.tight_layout()
+        self.space = MatplotlibChart(fig, expand=True)
+    
+    def update_plot(self, x_values, y_values):
+        fig, axs = plt.subplots(1, 1)
+        axs.plot(x_values,y_values)
+
+        fig.set_size_inches(self.size[0],self.size[1],forward=True)
+        fig.tight_layout()
+        self.space = MatplotlibChart(fig, expand=True)
