@@ -31,11 +31,12 @@ class Space:
     def __init__(self):
         self.space = None
         self.size = [16.5,6.7]
+        self.bg_color = [0.38, 0.38, 0.38, 0.49]
         self.default_plot()
 
     def default_plot(self):
         fig, axs = plt.subplots()
-        axs.set_xlim(0, 2)
+        axs.set_facecolor(self.bg_color)
         axs.set_xlabel("x")
         axs.set_ylabel("y")
         axs.grid(True)
@@ -47,6 +48,9 @@ class Space:
     def update_plot(self, x_values, y_values):
         fig, axs = plt.subplots(1, 1)
         axs.plot(x_values,y_values)
+        axs.set_facecolor(self.bg_color)
+        axs.set_xlabel("x")
+        axs.set_ylabel("y")
 
         fig.set_size_inches(self.size[0],self.size[1],forward=True)
         fig.tight_layout()
