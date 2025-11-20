@@ -11,7 +11,7 @@ def validate(min,max,inter):
     except:
         return False
 
-def choose_fucn(func):
+def choose_func(func):
     match(func):
         case 'sin':
             return lambda num: math.sin(num)
@@ -21,7 +21,7 @@ def choose_fucn(func):
             return lambda num: math.tan(num)
     
 def calc_func(min, max, inter, func):
-    calc_val = choose_fucn(func)
+    calc_val = choose_func(func)
     x_axis = range(int(min),int(max),int(inter))
     y_axis = [calc_val(y) for y in x_axis]
     return x_axis, y_axis

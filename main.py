@@ -3,20 +3,21 @@ import matplotlib.pyplot as plt
 import flet as ft
 from flet.matplotlib_chart import MatplotlibChart
 
-import utilidades
+import utilidades as utils
 
 matplotlib.use('svg')
 
 def main(page: ft.Page):
     def graficar(e):
-        if utilidades.validate(txt_min.value, txt_max.value, txt_inter.value):
-            x_values, y_values = utilidades.calc_func(txt_min.value, txt_max.value, txt_inter.value, dd_opt.value)
+        if utils.validate(txt_min.value, txt_max.value, txt_inter.value):
+            x_values, y_values = utils.calc_func(txt_min.value, txt_max.value, txt_inter.value, dd_opt.value)
             plt_space.update_plot(x_values,y_values)
             update_graph()
 
     def set_default(*args):
-        txt_min.value = 0
-        txt_max.value = 100
+        txt_min.value = default_min
+        txt_max.value = default_max
+        txt_inter.value = default_inter
         plt_space.default_plot()
         update_graph()
         page.update()
@@ -35,6 +36,9 @@ def main(page: ft.Page):
         )
         page.update()
 
+    default_min = '0'
+    default_max = '400'
+    default_inter = '1'
     
     page.window.width = 1280
     page.window.height = 720
@@ -42,13 +46,13 @@ def main(page: ft.Page):
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
     lbl_min = ft.Text(value='X min: ', color='white')
-    txt_min = ft.TextField(value="0", width=100)
+    txt_min = ft.TextField(value=default_min, width=100)
 
     lbl_max = ft.Text(value='X max: ', color='white')
-    txt_max = ft.TextField(value="1000", width=100)
+    txt_max = ft.TextField(value=default_max, width=100)
 
     lbl_inter = ft.Text(value='Intervalo: ', color='white')
-    txt_inter = ft.TextField(value="1", width=100)
+    txt_inter = ft.TextField(value=default_inter, width=100)
 
     btn_default = ft.ElevatedButton(text='Reiniciar', on_click=set_default)
     btn_calc = ft.ElevatedButton(text='Calcular', on_click=graficar)
@@ -65,7 +69,7 @@ def main(page: ft.Page):
         value='sin'
     )
 
-    plt_space = utilidades.Space()
+    plt_space = utils.Space()
 
     page.add(
         ft.Row(
